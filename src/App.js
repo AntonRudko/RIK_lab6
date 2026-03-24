@@ -1,7 +1,10 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import Drawer from './components/Drawer'
 import Header from './components/Header'
 import AppContext from './context'
+import ThemeContext from './ThemeContext'
+import ShortcutsHelp from './components/ShortcutsHelp/ShortcutsHelp'
+import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import { API } from './api'
 
 import Favorites from './pages/Favorites'
@@ -12,6 +15,11 @@ import axios from 'axios'
 import React from 'react'
 
 function App() {
+	const navigate = useNavigate()
+	const { toggleTheme } = React.useContext(ThemeContext)
+	const searchRef = React.useRef(null)
+	const [helpOpen, setHelpOpen] = React.useState(false)
+
 	const [items, setItems] = React.useState([])
 	const [cardItems, setCardItems] = React.useState([])
 	const [searchValue, setSearchValue] = React.useState('')
@@ -22,6 +30,16 @@ function App() {
 	React.useEffect(() => {
 		document.body.style.overflow = cardOpened ? 'hidden' : ''
 	}, [cardOpened])
+
+	useKeyboardShortcuts({
+		cardOpened,
+		setCardOpened,
+		toggleTheme,
+		navigate,
+		searchRef,
+		helpOpen,
+		setHelpOpen,
+	})
 
 	React.useEffect(() => {
 		async function fetchData() {
@@ -133,6 +151,7 @@ function App() {
 			}}
 		>
 			<div className='wrapper'>
+				{helpOpen && <ShortcutsHelp onClose={() => setHelpOpen(false)} />}
 				<Drawer
 					onRemove={onRemoveItem}
 					items={cardItems}
@@ -158,6 +177,7 @@ function App() {
 								onAddToFavorite={onAddToFavorite}
 								onAddToCard={onAddToCard}
 								isLoading={isLoading}
+								searchRef={searchRef}
 							/>
 						}
 					/>

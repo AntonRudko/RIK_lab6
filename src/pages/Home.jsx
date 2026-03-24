@@ -8,6 +8,7 @@ function Home({
 	onAddToFavorite,
 	onAddToCard,
 	isLoading,
+	searchRef,
 }) {
 	const filteredItems = items.filter(item =>
 		item.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -34,6 +35,7 @@ function Home({
 				<div className='search__block flex items-center'>
 					<img src='./img/loupe.svg' alt='loupe' />
 					<input
+						ref={searchRef}
 						onChange={onChangeSearchInput}
 						type='text'
 						value={searchValue}
