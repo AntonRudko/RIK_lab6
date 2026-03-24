@@ -1,0 +1,24 @@
+.card {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 16px 0;
+	border: 1px solid var(--color-border);
+	background-color: var(--color-bg-surface);
+	padding: 30px;
+	width: 170px;
+	border-radius: 40px;
+	transition: 0.2s transform ease-in-out, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+	&:hover {
+		box-shadow: var(--shadow-card);
+		transform: translateY(-5px);
+	}
+	.plus {
+		cursor: pointer;
+		width: 32px;
+		height: 32px;
+		&:hover {
+			opacity: 0.5;
+		}
+	}
+}
