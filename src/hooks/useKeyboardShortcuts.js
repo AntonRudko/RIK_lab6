@@ -39,7 +39,10 @@ export function useKeyboardShortcuts({
 				case '3':
 					navigate('/orders')
 					break
-				case 'Escape':
+				case '?':
+				setHelpOpen(v => !v)
+				break
+			case 'Escape':
 					if (cardOpened) {
 						setCardOpened(false)
 					} else if (helpOpen) {

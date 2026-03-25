@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './ShortcutsHelp.module.scss'
 
 const SHORTCUTS = [
+	{ key: '?', description: 'Відкрити / закрити цю підказку' },
 	{ key: 'C', description: 'Відкрити / закрити кошик' },
 	{ key: 'T', description: 'Змінити тему (світла / темна)' },
 	{ key: '⌘F / Ctrl+F', description: 'Сфокусуватись на пошуку' },
